@@ -1,46 +1,18 @@
-function openLetter() {
-    document.querySelector('.message-box-1').style.webkitAnimationPlayState = 'running';
-    //document.querySelector('.message-box-2').style.webkitAnimationPlayState = 'running';
-    document.querySelector('.arrow-down-closed').style.visibility = 'hidden';
-    document.querySelector('.arrow-up-open').style.visibility = 'visible';
-    document.querySelector('.media-btn').style.visibility = 'visible';
-    document.getElementById('audio').play();
-
-}
-
-var number = 0;
-function mediaBtn() {
-
-    number++;
-
-    if (number % 2 == 0) {
-        icon = '<i class="fas fa-pause"></i>';
-        document.getElementById('audio').play();
-    } else {
-        icon = '<i class="fas fa-play"></i>';
-        document.getElementById('audio').pause();
-    }
-
-    document.getElementById('media-button').innerHTML = icon;
-
-}
-/*
-var b1 = 1;
-var b2 = 2;
-function swap1() {
-    if (b2 % 2 == 0) {
-        document.getElementById('message-box-2').style.zIndex = "10";
-        document.getElementById('message-box-1').style.zIndex = "50";
-        b1++;
-        b2++;
-    }
-}
-function swap2() {
-    if (b1 % 2 == 0) {
-        document.querySelector('.message-box-2').style.zIndex = "10";
-        document.querySelector('.message-box-1').style.zIndex = "50";
-        b1++;
-        b2++;
-    }
-}
-*/
+const envelope=document.getElementById("envelope"),prelude=document.getElementById("prelude"),page=document.getElementById("page"),audio=document.getElementById("audio"),musicToggle=document.getElementById("musicToggle"),musicLabel=document.getElementById("musicLabel"),modal=document.getElementById("messageModal"),modalMessage=document.getElementById("modalMessage"),modalIndex=document.getElementById("modalIndex"),toast=document.getElementById("toast"),cursorGlow=document.querySelector(".cursor-glow");
+let opened=false,timer;
+function musicState(on){musicToggle.classList.toggle("is-playing",on);musicLabel.textContent=on?"sound on":"sound off";musicToggle.setAttribute("aria-pressed",String(on))}
+function toastMsg(message){toast.textContent=message;toast.classList.add("is-visible");clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove("is-visible"),3600)}
+function revealPage(){if(opened)return;opened=true;envelope.classList.add("is-open");envelope.setAttribute("aria-expanded","true");setTimeout(()=>{prelude.classList.add("is-hidden");page.classList.add("is-visible");document.body.classList.remove("is-locked");document.querySelectorAll(".hero .reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("is-visible"),i*110))},1050);audio.volume=.42;audio.play().then(()=>musicState(true)).catch(()=>{musicState(false);toastMsg("Halaman terbuka. Tekan sound on jika ingin memutar musik.")})}
+envelope.addEventListener("click",revealPage);
+musicToggle.addEventListener("click",async()=>{if(audio.paused){try{await audio.play();musicState(true)}catch{toastMsg("Browser menolak pemutaran. Coba tekan lagi.")}}else{audio.pause();musicState(false)}});
+audio.addEventListener("play",()=>musicState(true));audio.addEventListener("pause",()=>musicState(false));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:"0px 0px -45px 0px"});
+document.querySelectorAll(".page .reveal").forEach(el=>observer.observe(el));
+function openMessage(card){const cards=[...document.querySelectorAll(".secret-card")],index=String(cards.indexOf(card)+1).padStart(2,"0");modalIndex.textContent=index;modalMessage.textContent=card.dataset.message||"";modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");document.body.classList.add("is-locked")}
+function closeMessage(){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");document.body.classList.remove("is-locked")}
+document.querySelectorAll(".secret-card").forEach(card=>card.addEventListener("click",()=>openMessage(card)));
+document.querySelectorAll("[data-close-modal]").forEach(el=>el.addEventListener("click",closeMessage));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMessage()});
+document.getElementById("backTop").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+if(window.matchMedia("(pointer:fine)").matches){window.addEventListener("pointermove",e=>{cursorGlow.style.left=e.clientX+"px";cursorGlow.style.top=e.clientY+"px";cursorGlow.style.opacity="1"});document.addEventListener("mouseleave",()=>cursorGlow.style.opacity="0")}
+document.querySelectorAll(".secret-card").forEach(el=>{el.addEventListener("pointermove",e=>{if(!window.matchMedia("(pointer:fine)").matches)return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform="translateY(-10px) perspective(800px) rotateX("+(-y*3)+"deg) rotateY("+(x*3)+"deg)"});el.addEventListener("pointerleave",()=>el.style.transform="")})
