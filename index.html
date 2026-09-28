@@ -1,54 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta name="author" content="Satrio Bagus">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="./asset/icon/favicon-birthday-cake.png" />
-    <script src="https://kit.fontawesome.com/a6c3fb960a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./style/met.css">
-    <script type="text/javascript" src="met.js"></script>
-    <title>Cieeee</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="A quiet little corner made especially for you.">
+<link rel="icon" type="image/jpeg" href="./asset/icon/favicon-birthday-cake.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style/met.css?v=20260928-1">
+<title>For You — A Little Letter</title>
 </head>
-
 <body>
-    <!--GITHUB: Satrio-Bagus -->
-    <div class="letter" onclick="openLetter()">
-        <img src="./asset/letter-close4.svg" class="arrow-down-closed">
-        <div class="arrow-down"></div>
-        <img src="./asset/letter-open3.svg" class="arrow-up-open" alt="An open envelope with a clean and minimal design, featuring soft gray tones. The envelope is depicted in a flat, modern style, suggesting a calm and neutral tone. The background is plain and does not distract from the envelope as the central subject.">
-        <div class="arrow-up"></div>
-        <div class="arrow-left"></div>
-        <div class="arrow-right"></div>
-    </div>
-    <audio id="audio" src="./asset/music/music.mp3"></audio>
+<div class="site-noise" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
 
-    <div class="message-box-1" onclick="swap2()">
-
-        <div class="message-box-greeting">
-            <p>Meeet Semprooo Sayangku ♥<br>Semoga dari ujian kali ini kamu bisa menjadi lebih baik kedepannya...<br>
-                Maaf yaa belum sempat ngucapin yaa
-            </p>
-
-        </div>
+<div class="prelude" id="prelude">
+  <div class="prelude__content">
+    <p class="eyebrow">A PRIVATE LITTLE CORNER</p>
+    <div class="envelope-stage">
+      <button class="envelope" id="envelope" type="button" aria-label="Buka surat">
+        <span class="envelope__shadow"></span><span class="envelope__body"></span>
+        <span class="envelope__flap"></span>
+        <span class="envelope__paper"><span>FOR YOU</span></span>
+        <span class="envelope__seal">F</span>
+      </button>
     </div>
-    
-    <div class="message-box-2" onclick="swap1()">
-        <div class=" message-box-greeting">
-            <p>Gatau harus bilang apa lagi, yang penting Semangat! untuk apapaun itu. Gabisa ngasih apa2 cuma bisa
-                nunjukin ginian haha</p>
-        </div>
-    </div>
-   
-    <div class="media-btn" onclick="mediaBtn()">
-        <div class="media-button" id="media-button">
-            <i class="fas fa-pause"></i>
-        </div>
+    <p class="prelude__hint">tap the letter to begin</p>
+  </div>
+  <div class="prelude__footer"><span>01</span><span>SCROLLS AFTER THE LETTER</span></div>
+</div>
 
+<main class="page" id="page">
+<header class="nav">
+  <a class="brand" href="#top" aria-label="For You home"><span class="brand__mark">F</span><span class="brand__text">for you</span></a>
+  <div class="nav__right">
+    <span class="nav__status"><i></i> made with intention</span>
+    <button class="music-toggle" id="musicToggle" type="button" aria-label="Putar atau jeda musik" aria-pressed="false">
+      <span class="music-toggle__bars"><b></b><b></b><b></b><b></b></span><span id="musicLabel">sound off</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero section" id="top">
+  <div class="hero__meta reveal"><span>LETTER / 001</span><span>FOR SOMEONE SPECIAL</span></div>
+  <div class="hero__copy">
+    <p class="eyebrow reveal">not a grand gesture</p>
+    <h1 class="hero__title reveal">Some things<br>are better <em>felt</em><br>than explained.</h1>
+    <p class="hero__lead reveal">Jadi, daripada bingung harus bilang apa, aku bikin satu tempat kecil untuk menyimpan hal-hal yang ingin aku sampaikan.</p>
+    <a class="text-link reveal" href="#letter"><span>read the letter</span><span>↓</span></a>
+  </div>
+  <div class="hero__art reveal">
+    <div class="hero__frame">
+      <span class="hero__number">01</span><span class="hero__orb hero__orb--one"></span><span class="hero__orb hero__orb--two"></span>
+      <span class="hero__ring hero__ring--one"></span><span class="hero__ring hero__ring--two"></span>
+      <span class="hero__monogram">F</span><span class="hero__caption">quietly,<br>from the heart.</span>
     </div>
-    <script src="https://cdn.rawgit.com/bungfrangki/efeksalju/2a7805c7/efek-salju.js" type="text/javascript"></script>
+  </div>
+  <div class="scroll-cue"><span></span> scroll slowly</div>
+</section>
+
+<section class="statement section" id="letter">
+  <div class="section-label reveal"><span>02</span><span>THE LETTER</span></div>
+  <div class="statement__layout">
+    <div class="statement__side reveal"><p>Dear you,</p><span class="vertical-note">keep this close</span></div>
+    <div class="statement__main">
+      <p class="statement__large reveal">Aku mungkin bukan orang yang paling pandai merangkai kata. Tapi ada beberapa hal yang rasanya sayang kalau cuma disimpan sendiri.</p>
+      <p class="statement__body reveal">Terima kasih sudah menjadi seseorang yang kehadirannya bisa membuat hari biasa terasa sedikit lebih berarti. Semoga apa pun yang sedang kamu perjuangkan, pelan-pelan menemukan jalannya.</p>
+      <p class="statement__body reveal">Dan kalau suatu hari kamu merasa semuanya terlalu berat, semoga halaman kecil ini bisa mengingatkanmu bahwa ada seseorang yang pernah memilih untuk menuliskan ini khusus untukmu.</p>
+      <div class="signature reveal"><span>with all the quiet good things,</span><strong>F.</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline section">
+  <div class="section-label reveal"><span>03</span><span>A FEW THINGS</span></div>
+  <div class="timeline__intro reveal"><p class="eyebrow">little reminders</p><h2>For the days<br><em>in between.</em></h2></div>
+  <div class="timeline__list">
+    <article class="timeline-card reveal"><span class="timeline-card__index">01</span><div><p class="timeline-card__title">Take your time.</p><p>Not everything has to happen today. Progress can be quiet too.</p></div><span class="timeline-card__symbol">○</span></article>
+    <article class="timeline-card reveal"><span class="timeline-card__index">02</span><div><p class="timeline-card__title">Be proud of yourself.</p><p>You have made it through days you once thought would break you.</p></div><span class="timeline-card__symbol">+</span></article>
+    <article class="timeline-card reveal"><span class="timeline-card__index">03</span><div><p class="timeline-card__title">Keep choosing joy.</p><p>Even in the smallest forms. Especially in the smallest forms.</p></div><span class="timeline-card__symbol">✦</span></article>
+  </div>
+</section>
+
+<section class="open-when section">
+  <div class="section-label reveal"><span>04</span><span>OPEN WHEN</span></div>
+  <div class="open-when__head reveal"><h2>Save these<br><em>for later.</em></h2><p>Click one. There is a small message waiting inside.</p></div>
+  <div class="cards">
+    <button class="secret-card reveal" type="button" data-message="Tarik napas. Kamu tidak harus menyelesaikan semuanya sekaligus. Satu langkah kecil hari ini sudah cukup."><span class="secret-card__top">OPEN WHEN / 01</span><strong>you feel<br>overwhelmed</strong><span class="secret-card__bottom">tap to reveal ↗</span></button>
+    <button class="secret-card secret-card--dark reveal" type="button" data-message="Aku harap kamu tahu: pencapaianmu tidak pernah mengurangi nilai dirimu. Kamu tetap berharga, bahkan saat sedang berhenti sejenak."><span class="secret-card__top">OPEN WHEN / 02</span><strong>you doubt<br>yourself</strong><span class="secret-card__bottom">tap to reveal ↗</span></button>
+    <button class="secret-card reveal" type="button" data-message="Hari ini boleh sederhana. Cari satu hal kecil yang membuatmu tersenyum, lalu simpan baik-baik. Besok kita lanjut lagi."><span class="secret-card__top">OPEN WHEN / 03</span><strong>you need<br>a little light</strong><span class="secret-card__bottom">tap to reveal ↗</span></button>
+  </div>
+</section>
+
+<section class="closing section">
+  <div class="closing__line reveal"></div><p class="eyebrow reveal">END OF LETTER</p>
+  <h2 class="closing__title reveal">Somewhere between<br>the words, <em>there's you.</em></h2>
+  <p class="closing__note reveal">Keep this page. Come back whenever you need it.</p>
+  <button class="back-top reveal" id="backTop" type="button">↑ <span>back to the beginning</span></button>
+  <div class="closing__footer"><span>F / 2026</span><span>MADE QUIETLY, WITH CARE</span></div>
+</section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="message-modal" id="messageModal" aria-hidden="true">
+  <div class="message-modal__backdrop" data-close-modal></div>
+  <div class="message-modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="message-modal__close" type="button" data-close-modal aria-label="Tutup">×</button>
+    <span class="eyebrow">A LITTLE NOTE</span><span class="message-modal__index" id="modalIndex">01</span>
+    <h2 id="modalTitle">For you.</h2><p id="modalMessage"></p><span class="message-modal__sign">— F.</span>
+  </div>
+</div>
+
+<audio id="audio" src="./asset/music/music.mp3" preload="metadata"></audio>
+<script src="./met.js?v=20260928-1"></script>
 </body>
-
 </html>
